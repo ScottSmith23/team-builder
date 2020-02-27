@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Form = props => {
   // console.log("this is our props",props);
@@ -14,9 +14,23 @@ const Form = props => {
   };
   const submitForm = e => {
     e.preventDefault();
+    if(props.boolEdit == false){
     props.addNewMember(member);
+    } else {
+    props.editMember(member);
+    props.setBoolEdit(false);
+    }
     setMember({ name: "", email: "",role: "" });
   };
+  useEffect(() => {
+   
+    console.log(props.memberToEdit)
+    setMember(props.memberToEdit)
+
+  }, [props.memberToEdit]);
+
+  
+  
   return (
     <form onSubmit={submitForm}>
       <label htmlFor="name">Member Name</label>
@@ -44,6 +58,7 @@ const Form = props => {
       <button type="submit">Add Member</button>
     </form>
   );
+  
 };
 
 export default Form;

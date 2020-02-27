@@ -11,6 +11,13 @@ function App() {
       role: "Yolo"  
     }
   ]);
+  const [memberToEdit,setMemberToEdit] = useState({});  
+  const [boolEdit,setBoolEdit] = useState(false);
+  const grabMemberToEdit = e => {
+    setMemberToEdit(e);
+    console.log(memberToEdit)
+    setBoolEdit(true);
+  };
   const addNewMember = member => {
     const newMember = {
       id: Date.now(),
@@ -20,15 +27,21 @@ function App() {
     };
     setMembers([...members, newMember]);
   };
-  const memberToEdit = member => {
-    console.log(`eskeetit`);
-  };
+  const editMember = member => {
+    alert(`Editednshit`);
+    console.log(member)
+    let editedMembers = members.map(el => (
+      el.id === member.id ? {...el, name: member.name, email: member.email, role: member.role}: el
+    ))
+    setMembers(editedMembers);
+  }
+
   return (
     <div className="App">
       <h1>Team Members</h1>
       <p>hello</p>
-      <Form addNewMember={addNewMember} />
-      <Members members={members} membertoEdit={memberToEdit}  />
+      <Form addNewMember={addNewMember} memberToEdit={memberToEdit} editMember={editMember} boolEdit={boolEdit} setBoolEdit={setBoolEdit} />
+      <Members members={members} grabMembertoEdit={grabMemberToEdit}  />
     </div>
   );
 }

@@ -6,9 +6,9 @@ const Members = props => {
       {props.members.map(member => (
         <div className="note" key={member.id}>
           <h3>{member.name}</h3>
-          <p>{member.email}</p>
-          <p>{member.role}</p>
-          <button onClick={props.memberToEdit}>Edit Member</button>
+          <p>Email: {member.email}</p>
+          <p>Role: {member.role}</p>
+          <button onClick={(e)=>{props.grabMembertoEdit(member)}}>Edit Member</button>
         </div>
       ))}
     </div>
